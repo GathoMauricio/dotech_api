@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'status_user_id',
+        'rol_user_id',
         'name',
+        'middle_name',
+        'last_name',
+        'phone',
         'email',
+        'address',
         'password',
+        'fcm_token',
     ];
 
     /**
@@ -41,4 +48,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function estatus()
+    {
+        return $this->belongsTo(
+            'App\Models\EstatusUsuario',
+            'status_user_id',
+            'id'
+        )
+            ->withDefault();
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo(
+            'App\Models\RolUsuario',
+            'rol_user_id',
+            'id'
+        )
+            ->withDefault();
+    }
 }
