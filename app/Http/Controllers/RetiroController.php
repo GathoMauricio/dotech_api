@@ -68,4 +68,29 @@ class RetiroController extends Controller
             ]);
         }
     }
+
+    public function actualizarRetiro(Request $request)
+    {
+        $retiro = Retiro::find($request->retiro_id);
+        $retiro->description = $request->description;
+        $retiro->quantity = $request->quantity;
+        $retiro->emisor = $request->emisor;
+        $retiro->folio = $request->folio;
+        if ($retiro->save()) {
+            return response()->json([
+                'estatus' => 1,
+                'message' => 'Registro actualizado',
+            ]);
+        }
+    }
+    public function eliminarRetiro(Request $request)
+    {
+        $retiro = Retiro::find($request->retiro_id);
+        if ($retiro->delete()) {
+            return response()->json([
+                'estatus' => 1,
+                'message' => 'Registro eliminado',
+            ]);
+        }
+    }
 }

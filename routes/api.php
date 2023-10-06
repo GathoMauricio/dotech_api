@@ -21,6 +21,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('show_retiro', [retiroCtrl::class, 'show']);
     Route::post('aprobar_retiro', [retiroCtrl::class, 'aprobarRetiro']);
     Route::post('rechazar_retiro', [retiroCtrl::class, 'rechazarRetiro']);
+    Route::post('actualizar_retiro', [retiroCtrl::class, 'actualizarRetiro']);
+    Route::post('eliminar_retiro', [retiroCtrl::class, 'eliminarRetiro']);
 
     #CuentaRetiro
     Route::get('index_cuenta_retiro', [cuentaRetiroCtrl::class, 'index']);
