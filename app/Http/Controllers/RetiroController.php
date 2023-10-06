@@ -55,4 +55,17 @@ class RetiroController extends Controller
             ]);
         }
     }
+
+    public function rechazarRetiro(Request $request)
+    {
+        $retiro = Retiro::find($request->retiro_id);
+        $retiro->status = 'Rechazado';
+        $retiro->type = $request->type;
+        if ($retiro->save()) {
+            return response()->json([
+                'estatus' => 1,
+                'message' => 'Registro actualizado',
+            ]);
+        }
+    }
 }
