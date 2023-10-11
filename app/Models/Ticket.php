@@ -13,4 +13,34 @@ class Ticket extends Model
     public $timestamps = true;
 
     protected $fillable = [];
+
+    public function cliente()
+    {
+        return $this->belongsTo(
+            'App\Models\Cliente',
+            'company_id',
+            'id'
+        )
+            ->withDefault();
+    }
+
+    public function departamento()
+    {
+        return $this->belongsTo(
+            'App\Models\DeptoCliente',
+            'department_id',
+            'id'
+        )
+            ->withDefault();
+    }
+
+    public function autor()
+    {
+        return $this->belongsTo(
+            'App\Models\User',
+            'author_id',
+            'id'
+        )
+            ->withDefault();
+    }
 }
