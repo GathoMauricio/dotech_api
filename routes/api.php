@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('index_cotizaciones', [cotizacionCtrl::class, 'index']);
     Route::get('show_cotizacion', [cotizacionCtrl::class, 'show']);
     Route::post('enviar_cotizacion', [cotizacionCtrl::class, 'enviarCotizacion']);
+    Route::post('actualizar_estatus_cotizacion', [cotizacionCtrl::class, 'actualizarEstatus']);
+    Route::post('editar_cotizacion', [cotizacionCtrl::class, 'editarCotizacion']);
     #Productos
     Route::get('index_productos', [productosTicketCtrl::class, 'index']);
 });

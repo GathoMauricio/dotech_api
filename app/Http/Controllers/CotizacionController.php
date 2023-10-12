@@ -39,4 +39,51 @@ class CotizacionController extends Controller
 
         return $ticket;
     }
+
+    public function actualizarEstatus(Request $request)
+    {
+        $ticket = Ticket::find($request->ticket_id);
+
+        $ticket->investment = $request->investment;
+        $ticket->status = $request->status;
+
+        if ($ticket->save()) {
+            return response()->json([
+                'estatus' => 1,
+                'message' => 'Información actualizada',
+                'data' => $ticket
+            ]);
+        } else {
+            return response()->json([
+                'estatus' => 0,
+                'message' => 'Error al procesar la solicitud',
+            ]);
+        }
+    }
+
+    public function editarCotizacion(Request $request)
+    {
+        $ticket = Ticket::find($request->ticket_id);
+
+        $ticket->description = $request->description;
+        $ticket->delivery_days = $request->delivery_days;
+        $ticket->payment_type = $request->payment_type;
+        $ticket->observation = $request->observation;
+        $ticket->shipping = $request->shipping;
+        $ticket->credit = $request->credit;
+        $ticket->currency = $request->currency;
+
+        if ($ticket->save()) {
+            return response()->json([
+                'estatus' => 1,
+                'message' => 'Información actualizada',
+                'data' => $ticket
+            ]);
+        } else {
+            return response()->json([
+                'estatus' => 0,
+                'message' => 'Error al procesar la solicitud',
+            ]);
+        }
+    }
 }
