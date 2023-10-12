@@ -8,6 +8,7 @@ use App\Http\Controllers\RetiroController as retiroCtrl;
 use App\Http\Controllers\CuentaRetiroController as cuentaRetiroCtrl;
 use App\Http\Controllers\DeptoRetiroController as deptoRetiroCtrl;
 use App\Http\Controllers\CotizacionController as cotizacionCtrl;
+use App\Http\Controllers\ProductoTicketController as productosTicketCtrl;
 
 Route::post('api-login', [userCtrl::class, 'apiLogin']);
 Route::get('download-android-app', [appCtrl::class, 'downloadAndroidApp']);
@@ -32,4 +33,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('index_cotizaciones', [cotizacionCtrl::class, 'index']);
     Route::get('show_cotizacion', [cotizacionCtrl::class, 'show']);
     Route::post('enviar_cotizacion', [cotizacionCtrl::class, 'enviarCotizacion']);
+    #Productos
+    Route::get('index_productos', [productosTicketCtrl::class, 'index']);
 });
