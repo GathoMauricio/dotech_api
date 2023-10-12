@@ -46,7 +46,12 @@ class CotizacionController extends Controller
 
         $ticket->investment = $request->investment;
         $ticket->status = $request->status;
-
+        if ($request->status == 'Proyecto') {
+            $last_proy = Ticket::whereNotNull('folio_proyecto')->orderBy('id', 'DESC')->first();
+            $part = explode('-', $last_proy->folio_proyecto);
+            $ticket->folio_proyecto = 'PROY-' . ($part[1] + 1);
+            $ticket->project_at = date('Y-m-d H:i:s');
+        }
         if ($ticket->save()) {
             return response()->json([
                 'estatus' => 1,
