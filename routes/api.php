@@ -8,8 +8,10 @@ use App\Http\Controllers\RetiroController as retiroCtrl;
 use App\Http\Controllers\CuentaRetiroController as cuentaRetiroCtrl;
 use App\Http\Controllers\DeptoRetiroController as deptoRetiroCtrl;
 use App\Http\Controllers\CotizacionController as cotizacionCtrl;
+use App\Http\Controllers\ProyectoController as proyectoCtrl;
 use App\Http\Controllers\ProductoTicketController as productosTicketCtrl;
 use App\Http\Controllers\SeguimientoTicketController as SeguimientoTicketCtrl;
+use App\Http\Controllers\BitacoraController as bitacoraCtrl;
 
 Route::post('api-login', [userCtrl::class, 'apiLogin']);
 Route::get('download-android-app', [appCtrl::class, 'downloadAndroidApp']);
@@ -36,9 +38,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('enviar_cotizacion', [cotizacionCtrl::class, 'enviarCotizacion']);
     Route::post('actualizar_estatus_cotizacion', [cotizacionCtrl::class, 'actualizarEstatus']);
     Route::post('editar_cotizacion', [cotizacionCtrl::class, 'editarCotizacion']);
+    #Proyectos
+    Route::get('index_proyectos', [proyectoCtrl::class, 'index']);
+    Route::get('show_proyecto', [proyectoCtrl::class, 'show']);
     #Productos
     Route::get('index_productos', [productosTicketCtrl::class, 'index']);
-
     #Seguimiento ticket
     Route::get('index_seguimiento_ticket', [SeguimientoTicketCtrl::class, 'index']);
+    #Bitacora
+    Route::get('index_bitacoras', [bitacoraCtrl::class, 'index']);
 });
