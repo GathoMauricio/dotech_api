@@ -10,7 +10,7 @@ class AppController extends Controller
     {
         return response()->json([
             'status' => 1,
-            'last_version' => '0_0_1',
+            'last_version' => '0_0_2',
             //'última_version' => env('ANDROID_VERSION'),
         ]);
     }
@@ -18,6 +18,6 @@ class AppController extends Controller
     public function downloadAndroidApp(Request $request)
     {
         //Download::create(['ip' => $request->ip(), 'version' => '0.0.3']);
-        return response()->download(storage_path('app/public/android_app/dotech_app_0_0_1.apk'));
+        return response()->download(storage_path('app/public/android_app/dotech_app_0_0_2.apk'));
     }
 }
