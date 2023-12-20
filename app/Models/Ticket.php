@@ -43,4 +43,34 @@ class Ticket extends Model
         )
             ->withDefault();
     }
+
+    public function productos()
+    {
+        return $this->hasMany(ProductoTicket::class, 'sale_id', 'id');
+    }
+
+    public function pagos()
+    {
+        return $this->hasMany(PagoTicket::class, 'sale_id', 'id');
+    }
+
+    public function documentos()
+    {
+        return $this->hasMany(DocumentoTicket::class, 'sale_id', 'id');
+    }
+
+    public function retiros()
+    {
+        return $this->hasMany(Retiro::class, 'sale_id', 'id');
+    }
+
+    public function bitacoras()
+    {
+        return $this->hasMany(Bitacora::class, 'sale_id', 'id');
+    }
+
+    public function seguimientos()
+    {
+        return $this->hasMany(SeguimientoTicket::class, 'sale_id', 'id');
+    }
 }

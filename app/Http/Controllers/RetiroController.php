@@ -13,6 +13,7 @@ class RetiroController extends Controller
         $data = [];
         foreach ($retiros as $retiro) {
             $data[] = [
+                'ticket' => $retiro->proyecto,
                 'proyecto' => $retiro->proyecto->description,
                 'proveedor' => $retiro->proveedor->name,
                 'autor' => $retiro->autor->name . ' ' . $retiro->autor->middle_name . ' ' . $retiro->autor->last_name,
@@ -33,6 +34,7 @@ class RetiroController extends Controller
             'estatus' => 1,
             'message' => 'Información obtenida',
             'data' => [
+                'ticket' => $retiro->proyecto,
                 'proyecto' => $retiro->proyecto->description,
                 'proveedor' => $retiro->proveedor->name,
                 'autor' => $retiro->autor->name . ' ' . $retiro->autor->middle_name . ' ' . $retiro->autor->last_name,
