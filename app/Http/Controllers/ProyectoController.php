@@ -41,6 +41,7 @@ class ProyectoController extends Controller
         $ticket['cantidad_facturas'] = $ticket->documentos->count();
         $ticket['cantidad_retiros'] = $ticket->retiros->count();
         $ticket['cantidad_bitacoras'] = $ticket->bitacoras->count();
+        $ticket['cantidad_seguimientos'] = $ticket->seguimientos->count();
 
         return response()->json([
             'estatus' => 1,

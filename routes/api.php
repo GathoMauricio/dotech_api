@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('index_productos', [productosTicketCtrl::class, 'index']);
     #Seguimiento ticket
     Route::get('index_seguimiento_ticket', [SeguimientoTicketCtrl::class, 'index']);
+    Route::post('store_seguimiento_ticket', [SeguimientoTicketCtrl::class, 'store']);
     #Bitacora
     Route::get('index_bitacoras', [bitacoraCtrl::class, 'index']);
 });

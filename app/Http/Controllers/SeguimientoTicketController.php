@@ -16,4 +16,25 @@ class SeguimientoTicketController extends Controller
             'data' => $seguimientos
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $seguimiento = SeguimientoTicket::create([
+            'sale_id' => $request->ticket_id,
+            'author_id' => auth()->user()->id,
+            'body' => $request->body,
+        ]);
+        if ($seguimiento) {
+            return response()->json([
+                'status' => 1,
+                'message' => 'Ptición procesada'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Error en la peticion'
+            ]);
+        }
+        return $request;
+    }
 }

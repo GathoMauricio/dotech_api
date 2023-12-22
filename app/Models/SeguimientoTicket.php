@@ -13,7 +13,11 @@ class SeguimientoTicket extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'sale_id',
+        'author_id',
+        'body',
+    ];
 
     public function autor()
     {
