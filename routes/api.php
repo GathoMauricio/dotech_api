@@ -12,6 +12,7 @@ use App\Http\Controllers\ProyectoController as proyectoCtrl;
 use App\Http\Controllers\ProductoTicketController as productosTicketCtrl;
 use App\Http\Controllers\SeguimientoTicketController as SeguimientoTicketCtrl;
 use App\Http\Controllers\BitacoraController as bitacoraCtrl;
+use App\Http\Controllers\PagoController as pagoCtrl;
 
 Route::post('api-login', [userCtrl::class, 'apiLogin']);
 Route::get('download-android-app', [appCtrl::class, 'downloadAndroidApp']);
@@ -48,4 +49,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('store_seguimiento_ticket', [SeguimientoTicketCtrl::class, 'store']);
     #Bitacora
     Route::get('index_bitacoras', [bitacoraCtrl::class, 'index']);
+    #Pagos
+    Route::get('index_pagos', [pagoCtrl::class, 'index']);
 });

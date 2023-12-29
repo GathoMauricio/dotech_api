@@ -14,4 +14,9 @@ class PagoTicket extends Model
     public $timestamps = true;
 
     protected $fillable = [];
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'sale_id', 'id');
+    }
 }
