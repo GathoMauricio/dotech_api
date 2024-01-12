@@ -27,4 +27,24 @@ class BitacoraController extends Controller
             'data' => $bitacoras
         ]);
     }
+    public function index2(Request $request)
+    {
+        $bitacoras = Bitacora::with('ticket')
+            ->with('autor')
+            ->orderBy('id', 'DESC')
+            ->get();
+        $data = [];
+        foreach ($bitacoras as $bitacora) {
+            $data[] = [
+                'id' => $bitacora->id,
+                'author_id' => $bitacora->author_id,
+                'description' => $bitacora->description,
+            ];
+        }
+        return response()->json([
+            'estatus' => 1,
+            'message' => 'Información obtenida',
+            'data' => $bitacoras
+        ]);
+    }
 }
