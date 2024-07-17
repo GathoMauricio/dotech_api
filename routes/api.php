@@ -61,4 +61,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     #Vehiculos
     Route::get('index_vehiculos', [vehiculoCtrl::class, 'index']);
     Route::get('show_vehiculos', [vehiculoCtrl::class, 'show']);
+    Route::get('index_fotos_vehiculos', [vehiculoCtrl::class, 'fotos']);
 });
