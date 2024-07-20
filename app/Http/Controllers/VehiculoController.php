@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FotoVehiculo;
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
+use App\Models\MantenimientoVehiculo;
 
 class VehiculoController extends Controller
 {
@@ -26,9 +27,31 @@ class VehiculoController extends Controller
 
     public function fotos(Request $request)
     {
-        $items = FotoVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_At')->with('vehiculo')->get();
+        $items = FotoVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_at')->with('vehiculo')->get();
         return response()->json([
             'data' => $items
+        ]);
+    }
+
+    public function mantenimientos(Request $request)
+    {
+        $items = MantenimientoVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_at', 'DESC')
+            ->with('autor')
+            ->with('tipo')
+            ->with('vehiculo')
+            ->get();
+        return response()->json([
+            'data' => $items
+        ]);
+    }
+
+    public function showMantenimiento(Request $request)
+    {
+        $item = MantenimientoVehiculo::with('autor')
+            ->with('tipo')
+            ->with('vehiculo')->find($request->mantenimiento_id);
+        return response()->json([
+            'data' => $item
         ]);
     }
 }

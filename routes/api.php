@@ -62,4 +62,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('index_vehiculos', [vehiculoCtrl::class, 'index']);
     Route::get('show_vehiculos', [vehiculoCtrl::class, 'show']);
     Route::get('index_fotos_vehiculos', [vehiculoCtrl::class, 'fotos']);
+    Route::get('index_mantenimientos_vehiculos', [vehiculoCtrl::class, 'mantenimientos']);
+    Route::get('show_mantenimiento_vehiculo', [vehiculoCtrl::class, 'showMantenimiento']);
 });
