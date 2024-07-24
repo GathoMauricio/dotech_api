@@ -56,4 +56,9 @@ class MantenimientoVehiculo extends Model
         )
             ->withDefault();
     }
+
+    public function fotos()
+    {
+        return $this->hasMany(FotoMantenimientoVehiculo::class, 'maintenance_id', 'id');
+    }
 }

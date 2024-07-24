@@ -49,7 +49,9 @@ class VehiculoController extends Controller
     {
         $item = MantenimientoVehiculo::with('autor')
             ->with('tipo')
-            ->with('vehiculo')->find($request->mantenimiento_id);
+            ->with('vehiculo')
+            ->with('fotos')
+            ->find($request->mantenimiento_id);
         return response()->json([
             'data' => $item
         ]);
