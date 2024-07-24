@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FotoVehiculo;
+use App\Models\HistoriaVehiculo;
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
 use App\Models\MantenimientoVehiculo;
@@ -52,6 +53,29 @@ class VehiculoController extends Controller
             ->with('vehiculo')
             ->with('fotos')
             ->find($request->mantenimiento_id);
+        return response()->json([
+            'data' => $item
+        ]);
+    }
+
+    public function historias(Request $request)
+    {
+        $items = HistoriaVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_at', 'DESC')
+            ->with('autor')
+            ->with('vehiculo')
+            ->get();
+        return response()->json([
+            'data' => $items
+        ]);
+    }
+
+    public function showHistoria(Request $request)
+    {
+        $item = HistoriaVehiculo::with('autor')
+            ->with('autor')
+            ->with('vehiculo')
+            ->with('fotos')
+            ->find($request->historia_id);
         return response()->json([
             'data' => $item
         ]);
