@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DocumentoVehiculo;
 use App\Models\FotoVehiculo;
 use App\Models\HistoriaVehiculo;
 use App\Models\VerificacionVehiculo;
@@ -85,6 +86,17 @@ class VehiculoController extends Controller
     public function verificaciones(Request $request)
     {
         $items = VerificacionVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_at', 'DESC')
+            ->with('autor')
+            ->with('vehiculo')
+            ->get();
+        return response()->json([
+            'data' => $items
+        ]);
+    }
+
+    public function documentos(Request $request)
+    {
+        $items = DocumentoVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_at', 'DESC')
             ->with('autor')
             ->with('vehiculo')
             ->get();
