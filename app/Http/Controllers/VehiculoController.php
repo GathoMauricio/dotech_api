@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FotoVehiculo;
 use App\Models\HistoriaVehiculo;
+use App\Models\VerificacionVehiculo;
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
 use App\Models\MantenimientoVehiculo;
@@ -78,6 +79,17 @@ class VehiculoController extends Controller
             ->find($request->historia_id);
         return response()->json([
             'data' => $item
+        ]);
+    }
+
+    public function verificaciones(Request $request)
+    {
+        $items = VerificacionVehiculo::where('vehicle_id', $request->vehiculo_id)->orderBy('created_at', 'DESC')
+            ->with('autor')
+            ->with('vehiculo')
+            ->get();
+        return response()->json([
+            'data' => $items
         ]);
     }
 }
