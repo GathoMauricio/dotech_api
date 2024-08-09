@@ -19,6 +19,7 @@ class FotoHistoriaVehiculo extends Model
         'vehicle_history_id',
         'image',
         'description',
+        'source',
         'created_at',
         'updated_at',
     ];

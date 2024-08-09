@@ -140,6 +140,7 @@ class VehiculoController extends Controller
             'vehicle_history_id' => $request->vehicle_history_id,
             'image' => 'pendiente',
             'description' => $request->description,
+            'source' => 'API',
         ]);
         if ($foto) {
             $nombreArchivo =  $request->vehicle_history_id . '_' . $foto->id . '_' . '.png';
