@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\DocumentoVehiculo;
+use App\Models\FotoHistoriaVehiculo;
 use App\Models\FotoVehiculo;
 use App\Models\HistoriaVehiculo;
 use App\Models\VerificacionVehiculo;
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
 use App\Models\MantenimientoVehiculo;
+use Illuminate\Support\Facades\Auth;
 
 class VehiculoController extends Controller
 {
@@ -103,5 +105,52 @@ class VehiculoController extends Controller
         return response()->json([
             'data' => $items
         ]);
+    }
+
+    public function storeSalida(Request $request)
+    {
+        $salida = HistoriaVehiculo::create([
+            'author_id' => Auth::user()->id,
+            'vehicle_id' => $request->vehicle_id,
+            'kilometers' => $request->kilometers,
+            'description' => $request->description,
+            'observation' => $request->observation,
+        ]);
+
+        if ($salida) {
+            return response()->json([
+                'estatus' => 'OK',
+                'data' => $salida
+            ], 200);
+        } else {
+            return response()->json([
+                'estatus' => 'FAIL',
+            ]);
+        }
+    }
+
+    public function storeImagenSalida(Request $request)
+    {
+        $archivo = $request->image;
+        $archivo = str_replace('data:image/png;base64,', '', $archivo);
+        $archivo = str_replace(' ', '+', $archivo);
+        $ruta = '/app/public/salidas_imagenes/';
+        $foto = FotoHistoriaVehiculo::create([
+            'author_id' => \Auth::user()->id,
+            'vehicle_history_id' => $request->vehicle_history_id,
+            'image' => 'pendiente',
+            'description' => $request->description,
+        ]);
+        if ($foto) {
+            $nombreArchivo =  $request->vehicle_history_id . '_' . $foto->id . '_' . '.png';
+            $foto->image = $nombreArchivo;
+            $foto->save();
+            \File::put(storage_path($ruta . $nombreArchivo), base64_decode($archivo));
+            return request()->json([
+                'estatus' => 'OK'
+            ]);
+        } else {
+            return request()->json(['estatus' => 'FAIL']);
+        }
     }
 }
