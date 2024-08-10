@@ -18,6 +18,7 @@ class FotoMantenimientoVehiculo extends Model
         'maintenance_id',
         'image',
         'description',
+        'source',
         'created_at',
         'updated_at',
     ];

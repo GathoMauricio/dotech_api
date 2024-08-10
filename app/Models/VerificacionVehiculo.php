@@ -21,6 +21,7 @@ class VerificacionVehiculo extends Model
         'kilometers',
         'type',
         'image',
+        'source',
         'created_at',
         'updated_al',
     ];

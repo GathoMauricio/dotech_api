@@ -22,6 +22,7 @@ class MantenimientoVehiculo extends Model
         'date',
         'amount',
         'description',
+        'source',
         'other',
         'created_at',
         'updated_at',
