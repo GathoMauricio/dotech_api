@@ -74,4 +74,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('store_imagen_mantenimiento_vehiculos', [vehiculoCtrl::class, 'storeImagenMantenimiento']);
     Route::get('tipos_mantenimientos', [vehiculoCtrl::class, 'tiposMantenimientos']);
     Route::post('store_verificacion_vehiculos', [vehiculoCtrl::class, 'storeVerificacion']);
+    Route::post('store_inventario_vehiculos', [vehiculoCtrl::class, 'storeInventario']);
+    Route::post('store_inventario_foto_vehiculos', [vehiculoCtrl::class, 'storeInventarioFoto']);
 });

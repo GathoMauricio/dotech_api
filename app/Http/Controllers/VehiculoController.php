@@ -12,6 +12,8 @@ use App\Models\Vehiculo;
 use App\Models\MantenimientoVehiculo;
 use App\Models\FotoMantenimientoVehiculo;
 use App\Models\TipoMantenimientoVehiculo;
+use App\Models\InventarioVehiculo;
+use App\Models\FotoInventarioVehiculo;
 use Illuminate\Support\Facades\Auth;
 
 class VehiculoController extends Controller
@@ -150,10 +152,10 @@ class VehiculoController extends Controller
             $foto->save();
             \File::put(storage_path($ruta . $nombreArchivo), base64_decode($archivo));
             return request()->json([
-                'estatus' => 'OK'
+                'response' => 'OK'
             ]);
         } else {
-            return request()->json(['estatus' => 'FAIL']);
+            return response()->json(['estatus' => 'FAIL']);
         }
     }
 
@@ -199,11 +201,11 @@ class VehiculoController extends Controller
             $foto->image = $nombreArchivo;
             $foto->save();
             \File::put(storage_path($ruta . $nombreArchivo), base64_decode($archivo));
-            return request()->json([
+            return response()->json([
                 'estatus' => 'OK'
             ]);
         } else {
-            return request()->json(['estatus' => 'FAIL']);
+            return response()->json(['estatus' => 'FAIL']);
         }
     }
 
@@ -237,11 +239,53 @@ class VehiculoController extends Controller
             $verificacion->image = $nombreArchivo;
             $verificacion->save();
             \File::put(storage_path($ruta . $nombreArchivo), base64_decode($archivo));
-            return request()->json([
+            return response()->json([
                 'estatus' => 'OK'
             ]);
         } else {
-            return request()->json(['estatus' => 'FAIL']);
+            return response()->json(['estatus' => 'FAIL']);
+        }
+    }
+
+    public function storeInventario(Request $request)
+    {
+        $inventario = InventarioVehiculo::create(
+            $request->except(['id', 'autor_id']) + ['autor_id' => Auth::user()->id]
+        );
+        if ($inventario) {
+            //$inventario->autor_id = Auth::user()->id;
+            return response()->json(['estatus' => 'OK', 'data' => $inventario]);
+        } else {
+            return response()->json(['estatus' => 'FAIL']);
+        }
+    }
+
+    public function storeInventarioFoto(Request $request)
+    {
+
+        $archivo = $request->foto;
+        $archivo = str_replace('data:image/png;base64,', '', $archivo);
+        $archivo = str_replace(' ', '+', $archivo);
+        $ruta = '/app/public/inventario_fotos/';
+        $foto = FotoInventarioVehiculo::create([
+            'autor_id' => Auth::user()->id,
+            'inventario_id' => $request->inventario_id,
+            'foto' => 'pendiente',
+            'descripcion' => $request->descripcion,
+            'seccion' => $request->seccion,
+            'source' => 'API',
+        ]);
+        if ($foto) {
+            $nombreArchivo =  $request->inventario_id . '_' . $foto->id . '_' . '.png';
+            $foto->foto = $nombreArchivo;
+            $foto->save();
+            \File::put(storage_path($ruta . $nombreArchivo), base64_decode($archivo));
+            return response()->json([
+                'estatus' => 'OK'
+            ]);
+        } else {
+
+            return response()->json(['estatus' => 'FAIL']);
         }
     }
 }
