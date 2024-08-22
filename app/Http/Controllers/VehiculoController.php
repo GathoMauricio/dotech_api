@@ -247,6 +247,15 @@ class VehiculoController extends Controller
         }
     }
 
+    public function inventarios(Request $request)
+    {
+        $inventarios = InventarioVehiculo::where('vehiculo_id', $request->vehiculo_id)->with('autor')->get();
+        return response()->json([
+            'estatus' => 'OK',
+            'data' => $inventarios,
+        ]);
+    }
+
     public function storeInventario(Request $request)
     {
         $inventario = InventarioVehiculo::create(

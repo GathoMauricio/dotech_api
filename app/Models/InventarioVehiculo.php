@@ -201,7 +201,7 @@ class InventarioVehiculo extends Model
     public function vehiculo()
     {
         return $this->belongsTo(
-            'App\Vehiculo',
+            'App\Models\Vehiculo',
             'vehiculo_id',
             'id'
         )
@@ -211,7 +211,7 @@ class InventarioVehiculo extends Model
     public function autor()
     {
         return $this->belongsTo(
-            'App\User',
+            'App\Models\User',
             'autor_id',
             'id'
         )
