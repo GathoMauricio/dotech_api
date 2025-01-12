@@ -73,4 +73,9 @@ class Ticket extends Model
     {
         return $this->hasMany(SeguimientoTicket::class, 'sale_id', 'id');
     }
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->setTimezone('America/Mexico_City')->format('Y-m-d H:i:s');
+    }
 }

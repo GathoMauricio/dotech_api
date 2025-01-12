@@ -14,4 +14,9 @@ class RolUsuario extends Model
     public $timestamps = true;
 
     protected $fillable = ['name'];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->setTimezone('America/Mexico_City')->format('Y-m-d H:i:s');
+    }
 }

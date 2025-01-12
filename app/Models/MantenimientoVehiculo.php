@@ -62,4 +62,9 @@ class MantenimientoVehiculo extends Model
     {
         return $this->hasMany(FotoMantenimientoVehiculo::class, 'maintenance_id', 'id');
     }
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->setTimezone('America/Mexico_City')->format('Y-m-d H:i:s');
+    }
 }

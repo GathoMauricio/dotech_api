@@ -65,4 +65,9 @@ class Retiro extends Model
         )
             ->withDefault();
     }
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->setTimezone('America/Mexico_City')->format('Y-m-d H:i:s');
+    }
 }
